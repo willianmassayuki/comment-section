@@ -1,0 +1,52 @@
+@use '../variables';
+@use '../mixins';
+
+.comment {
+  background-color: variables.$comment-bg-color;
+  font-family: variables.$font-stack;
+  font-size: variables.$p-font-size;
+  
+  .vote-count{
+    color: variables.$edit-vote-color;
+    background-color: variables.$count-bg-color;
+    width: 2.5rem;
+    height: 80px;
+    border-radius: 12px;
+    padding: 0 .5rem;
+    @include mixins.center(column, space-between);
+
+    @media screen and (max-width: variables.$mobile-size) {
+      @include mixins.center(row-reverse, space-between);
+      width: 80px;
+      height: 2.5rem;
+      
+    }
+    
+    .negative {
+      color: variables.$delete-color;
+    }
+
+    button {
+      display: flex;
+      border: none;
+      background-color: transparent;
+      outline: 0;
+      align-items: center;
+      height: 1.5rem;
+
+      &:hover svg path {
+        fill: variables.$edit-vote-color;
+      }
+      
+      svg path {
+        fill: variables.$edit-color-hover;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+  }
+  
+}
