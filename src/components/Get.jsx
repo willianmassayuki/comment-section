@@ -24,7 +24,7 @@ function Get() {
 
 
   return (
-    <div>
+    <>
         {/*
         {dados?.comments?.map((data) => (
         <div key={dados?.id}>
@@ -42,7 +42,7 @@ function Get() {
         <span>{createdAt}</span>
         <p>{comment}</p>
   */}
-    </div>
+    </>
   )
 }
 

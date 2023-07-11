@@ -1,2 +1,63 @@
 @use '../variables';
 @use '../mixins';
+
+.reply {
+    background-color: variables.$comment-bg-color;
+    font-family: variables.$font-stack;
+    font-size: variables.$p-font-size; 
+    color: variables.$p-cancel-color; 
+    width: 70%;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    display: grid;
+    grid-template-columns: 60px 3fr 1fr;
+    grid-template-rows: 40px 1fr;
+    gap: 10px;
+
+    .vote-count{
+      grid-column: 1;
+    }
+
+    .comment-top-content {
+      @include mixins.center(row, start);
+      gap: .75rem;
+
+      img {
+        width: 2.5rem;
+      }
+
+      span {
+        font-weight: 700;
+      }
+    }
+
+    button {
+      border: none;
+      outline: 0;
+      background-color: transparent;
+      font-size: 1.1rem;
+      color: variables.$edit-vote-color;
+      font-weight: 700;
+      
+      &:hover {
+        color: variables.$edit-color-hover;
+        cursor: pointer;
+
+        img {
+          opacity: 50%;
+        }
+      }
+    
+      img {
+        height: 1rem;
+        width: 1rem;
+        margin-right: .5rem;
+        
+      }
+    }
+
+    p {
+      grid-row: 2;
+      grid-column: 2/4;
+    }
+  }

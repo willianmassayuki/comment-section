@@ -6,16 +6,17 @@ const Reply = ({respostas}) => {
     return (
       <>
         {respostas?.map((data) => (
-          <div className="reply" key={data?.id}>
-            <VoteCount />
-            <div className="comment-content">
+          <div className="reply" key={data?.id}>    
+            <div className="vote-count">
+              <VoteCount />
+            </div>
+            <div className="comment-top-content">
               <img src={data?.user?.image?.png} alt="Profile picture" />
               <span>{data?.user?.username}</span>
-              <span>{data?.createdAt}</span>
-              <p>{data.content}</p>
+              <p>{data?.createdAt}</p>
             </div>
-          <button className='comment__reply'>Reply</button>
-          
+            <button className='comment__reply-button'><img src="/images/icon-reply.svg" alt="Reply"/>Reply</button>
+            <p>{data?.content}</p>
           </div>
         ))}
     </>  
@@ -23,4 +24,4 @@ const Reply = ({respostas}) => {
   }
   
   export default Reply
-  
+       
