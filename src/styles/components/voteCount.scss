@@ -8,6 +8,7 @@
     height: 90px;
     border-radius: 12px;
     padding: 0 .5rem;
+    margin: 1.25rem 0 1.25rem 1.25rem;
     @include mixins.center(column, space-between);
 
     @media screen and (max-width: variables.$mobile-size) {

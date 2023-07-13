@@ -1,0 +1,45 @@
+@use '../variables';
+@use '../mixins';
+
+.reply-input {
+    background-color: variables.$comment-bg-color;
+    width: 100%;
+    @include mixins.center(row, space-around);
+    align-items: start;
+    font-family: variables.$font-stack;
+    font-size: variables.$p-font-size; 
+    color: variables.$p-cancel-color; 
+    border-radius: .5rem;
+    margin-top: 1.25rem;
+
+    img {
+      width: 3rem;
+      margin: 1.25rem;
+    }
+
+    textarea {
+        margin: 1.25rem;
+        border-radius: .5rem;
+        resize: none;
+    }
+
+    button[type="submit"] {
+        margin: 1.25rem;
+        padding: 0 1rem;
+        background-color: variables.$edit-vote-color;
+        height: 2.5rem;
+        border-radius: .25rem;
+        color: variables.$comment-bg-color;
+        font-family: inherit;
+        font-weight: 700;
+        border: none;
+
+        &:hover {
+            background-color: variables.$edit-color-hover;
+            cursor: pointer;
+        }
+        
+       
+    }
+
+  }

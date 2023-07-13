@@ -1,69 +1,127 @@
 @use '../variables';
 @use '../mixins';
 
+.inativo {
+  display: none;
+}
+
+#show {
+  display: block;
+  width: 100%;
+}
+
 .comment-container {
-  margin-bottom: 1.25rem;
   
   @include mixins.center(column, center);
 
-  .comment {
-    background-color: variables.$comment-bg-color;
-    font-family: variables.$font-stack;
-    font-size: variables.$p-font-size; 
-    color: variables.$p-cancel-color; 
+  .comment-limit-container {
     width: 80%;
-    padding: 1.5rem;
-    border-radius: .5rem;
-    display: grid;
-    grid-template-columns: 60px 3fr 1fr;
-    grid-template-rows: 40px 1fr;
-    gap: 10px;
+    @include mixins.center(column, end);
+    align-items: end;
 
-    .vote-count{
-      grid-column: 1;
-    }
+    .comment {
+      background-color: variables.$comment-bg-color;
+      font-family: variables.$font-stack;
+      font-size: variables.$p-font-size; 
+      color: variables.$p-cancel-color; 
+      width: 100%;
+      //padding: 1.5rem;
+      border-radius: .5rem;
+      display: grid;
+      grid-template-columns: 60px 3fr 1fr;
+      grid-template-rows: 40px 1fr;
+      gap: 10px;
 
-    .comment-top-content {
-      @include mixins.center(row, start);
-      gap: .75rem;
-
-      img {
-        width: 2.5rem;
+      .vote-count{
+        grid-column: 1;
       }
 
-      span {
-        font-weight: 700;
-      }
-    }
-
-    button {
-      border: none;
-      outline: 0;
-      background-color: transparent;
-      font-size: 1.1rem;
-      color: variables.$edit-vote-color;
-      font-weight: 700;
-      
-      &:hover {
-        color: variables.$edit-color-hover;
-        cursor: pointer;
+      .comment-top-content {
+        @include mixins.center(row, start);
+        gap: .75rem;
+        margin-top: 1.25rem;
 
         img {
-          opacity: 50%;
+          width: 2.5rem;
+        }
+
+        span {
+          font-weight: 700;
+        }
+
+        .tag-you {
+          color: variables.$comment-bg-color;
+          background-color: variables.$edit-vote-color;
+          font-weight: 400;
+          padding: 2px 5px;
+          border-radius: 4px;
         }
       }
-    
-      img {
-        height: 1rem;
-        width: 1rem;
-        margin-right: .5rem;
+
+
+      .author-buttons {
+        display: flex;
+        justify-content: end;
+        margin-right: 20px;
+      }
+
+      .delete-button {
+        color: variables.$delete-color;
+  
+        &:hover {
+          color: variables.$delete-color-hover;
+        }
+      }
+
+      .comment__reply-button {
+        margin-top: 1.25rem;
+      }
+
+      button {
+        border: none;
+        outline: 0;
+        background-color: transparent;
+        font-size: 1.1rem;
+        color: variables.$edit-vote-color;
+        font-weight: 700;
         
+        
+        &:hover {
+          color: variables.$edit-color-hover;
+          cursor: pointer;
+
+          img {
+            opacity: 50%;
+          }
+        }
+      
+        img {
+          height: 1rem;
+          width: 1rem;
+          margin-right: .5rem;
+          
+        }
+      }
+
+      p {
+        grid-row: 2;
+        grid-column: 2/4;
+        margin: 1.25rem 1.25rem 1.25rem 0;
       }
     }
 
-    p {
-      grid-row: 2;
-      grid-column: 2/4;
+    .reply-container {
+      @include mixins.center(column, end);
+      align-items: end;
+      gap: 15px;
+      width: 95%;
+      margin-top: 15px;
+      border-left: 1px solid variables.$p-cancel-color;
+
+      .reply-input {
+        width: 95%;
+        margin: 0 0 0 auto;
+      }
     }
   }
 }

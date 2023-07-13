@@ -7,8 +7,6 @@ function App() {
     <>
       <div className='page-wrapper'>
         <Get />
-       
-        
       </div>       
     </>
   )

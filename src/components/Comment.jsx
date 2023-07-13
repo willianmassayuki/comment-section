@@ -1,27 +1,81 @@
+import { useState } from 'react';
 import '../styles/components/comment.scss';
 import Reply from './Reply';
+import ReplyInput from './ReplyInput';
 import VoteCount from './VoteCount';
 
+
 const Comment = ({objeto}) => {
+  const [replyId, setReplyId] = useState();
+  const [novoObjeto, setNovoObjeto] = useState(objeto);
+
+  function show(id) {
+   setReplyId(id); 
+  }
+
+  function deleteComment(id) {
+    // Obter os dados armazenados no localStorage
+    const storedData = localStorage.getItem('dados');
+  
+    if (storedData) {
+      // Converter os dados de volta para um objeto
+      const parsedData = JSON.parse(storedData);
+  
+      // Encontrar o índice do elemento com o ID fornecido
+      const index = parsedData.findIndex(item => item.id === id);
+      console.log(index);
+  
+      if (index !== -1) {
+        // Remover o elemento do array
+        parsedData.splice(index, 1);
+  
+        // Atualizar o localStorage com os dados atualizados
+        localStorage.setItem('dados', JSON.stringify(parsedData));
+  
+        // Atualizar o estado do componente, se necessário
+        setDados(parsedData);
+      }
+    }
+  }
+
+  function editComment(id) {
+  setReplyId(id); 
+  }
+
+
 
   return (
     <>
       {objeto?.comments?.map((data) => (
-        <div className="comment-container">
-          <div className="comment" key={data?.id}>
-            <div className="vote-count">
-              <VoteCount />
+        <div className="comment-container" key={data?.id}>
+          <div className="comment-limit-container">
+            <div className="comment">
+              <VoteCount score={data?.score}/>
+              <div className="comment-top-content">
+                <img src={data?.user?.image?.png} alt="Profile picture" />
+                <span>{data?.user?.username}</span>
+                <p>{data?.createdAt}</p>
+              </div>
+              { data?.user?.username == objeto?.currentUser?.username ? 
+              <div className='author-buttons'>
+                <button className='comment__reply-button delete-button' onClick={() => deleteComment(data.id)}><img src="/images/icon-delete.svg" alt="Delete"/>Delete</button>
+                <button className='comment__reply-button' onClick={() => editComment(data.id)}><img src="/images/icon-edit.svg" alt="Edit"/>Edit</button>
+              </div>
+            :
+              <div className='author-buttons'>
+                <button className='comment__reply-button' onClick={() => show(data.id)}><img src="/images/icon-reply.svg" alt="Reply"/>Reply</button>
+              </div>
+              }
+              <p>{data?.content}</p>
             </div>
-            <div className="comment-top-content">
-              <img src={data?.user?.image?.png} alt="Profile picture" />
-              <span>{data?.user?.username}</span>
-              <p>{data?.createdAt}</p>
+            <div className="inativo" id={`${replyId == data?.id ? "show" : "any"}`}>
+              <ReplyInput objeto={objeto}/>
             </div>
-            <button className='comment__reply-button'><img src="/images/icon-reply.svg" alt="Reply"/>Reply</button>
-            <p>{data?.content}</p>
+            <div className="reply-container">
+              <Reply objeto={objeto} replyData={data}/>
+            </div>
             
           </div>
-          <Reply respostas={data?.replies} />
         </div>
       ))}
   </>  
