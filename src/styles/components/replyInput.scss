@@ -12,15 +12,23 @@
     border-radius: .5rem;
     margin-top: 1.25rem;
 
+    @media screen and (max-width: variables.$mobile-size) {
+        flex-direction: column;
+      }
+
     img {
       width: 3rem;
       margin: 1.25rem;
+      @media screen and (max-width: variables.$mobile-size) {
+        display: none;
+      }
     }
 
     textarea {
         margin: 1.25rem;
         border-radius: .5rem;
         resize: none;
+        width: -webkit-fill-available;
     }
 
     button[type="submit"] {

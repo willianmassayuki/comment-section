@@ -14,7 +14,7 @@
     @media screen and (max-width: variables.$mobile-size) {
       @include mixins.center(row-reverse, space-between);
       width: 90px;
-      height: 1.5rem;
+      height: 2rem;
     }
     
     .negative {

@@ -21,27 +21,32 @@ const Reply = ({objeto, replyData}) => {
   }
 
   function deleteComment(id) {
-    // Obter os dados armazenados no localStorage
     const storedData = localStorage.getItem('dados');
   
     if (storedData) {
-      // Converter os dados de volta para um objeto
       const parsedData = JSON.parse(storedData);
   
-      // Encontrar o índice do elemento com o ID fornecido
-      const index = parsedData.findIndex(item => item.comments.map((dados) => (dados.id === id) ));
-      console.log(index);
+      // Filtrar os comentários, removendo o item com o ID correspondente
+      const updatedComments = parsedData.comments.filter(comment => comment.id !== id);
   
-      if (index !== -1) {
-        // Remover o elemento do array
-        parsedData.splice(index, 1);
+      // Filtrar as respostas, removendo os itens com o ID correspondente
+      const updatedReplies = parsedData.comments.map(comment => {
+        const updatedComment = { ...comment };
+        updatedComment.replies = updatedComment.replies.filter(reply => reply.id !== id);
+        return updatedComment;
+      });
   
-        // Atualizar o localStorage com os dados atualizados
-        localStorage.setItem('dados', JSON.stringify(parsedData));
+      // Atualizar o objeto com os comentários e respostas atualizados
+      parsedData.comments = updatedComments;
+      parsedData.comments.forEach((comment, index) => {
+        comment.replies = updatedReplies[index].replies;
+      });
   
-        // Atualizar o estado do componente, se necessário
-        setDados(parsedData);
-      }
+      // Atualizar o localStorage com os dados atualizados
+      localStorage.setItem('dados', JSON.stringify(parsedData));
+  
+      // Atualizar o estado do componente, se necessário
+      setDados(parsedData);
     }
   }
 
